@@ -41,6 +41,13 @@ pipeline {
                 sh 'docker run -itd -p 8089:8089 chtseng93/springboot-kafka-demo:${BUILD_NUMBER}'
             }
         }
+        stage('Kubernetes Deploy') {
+            steps {
+                echo "Deploying to Kubernetes"
+                // 使用 kubectl 命令來更新 Kubernetes 部署
+                sh 'kubectl set image deployment/springboot-kafka-demo springboot-kafka-demo=chtseng93/springboot-kafka-demo:${BUILD_NUMBER} --record'
+            }
+        }
         stage('Archiving') {
             steps {
                 // Archive the built JAR
