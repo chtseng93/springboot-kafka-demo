@@ -3,6 +3,9 @@ pipeline {
     tools {
         maven "Maven_3.9.6"
     }
+    environment {
+        KUBECONFIG = '/path/to/your/kubeconfig'
+    }
     stages {
         stage('Compile and Clean') { 
             steps {
